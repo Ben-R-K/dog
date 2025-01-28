@@ -5,11 +5,11 @@ import { SelectGroup, SelectItem, SelectLabel} from "@/components/ui/select";
 
 type Breed = {
     BreedName: string;
-    SubBreed: string;
+    SubBreeds: [undefined];
 };
 
 export const BreedsClient = () => {
- const [breeds, setBreeds] = useState<Breed[]>([]);
+ const [breeds, setBreeds] = useState(Object);
  const [loading, setLoading] = useState(true);
  const [error, setError] = useState("");
 
@@ -19,8 +19,11 @@ export const BreedsClient = () => {
             const response = await fetch("https://dog.ceo/api/breeds/list/all");
 
             if (!response.ok) throw new Error("Faild to fetch dog breed list");
-            const data = await response.json();
-            setBreeds(data);
+            const rawdata = await response.json();
+            const entries = Object.entries(rawdata.message);
+            console.log(entries);
+            setBreeds(entries[0]);
+            console.log(breeds);
         } catch(err){
             setError("Failed to fetch dog breed list");
             if(err instanceof Error) {
@@ -39,10 +42,10 @@ export const BreedsClient = () => {
     return(
         <SelectGroup>
             <SelectLabel>Hunderacer</SelectLabel>
-            {breeds.map((breed) => (
-                <SelectItem key={breed.BreedName} value="">breed.BreedName</SelectItem>
-            ))}
+            {Array.isArray(breeds) ? breeds.map((breed : Breed) => {
+                return <SelectItem key={breed.BreedName} value="Dog">{JSON.stringify(breed.BreedName)}</SelectItem>
+            }) : <SelectItem value="F">Failed</SelectItem> }
         </SelectGroup>
     );
-}
+};
 
