@@ -1,6 +1,6 @@
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectTrigger, SelectValue } from "@/components/ui/select";
-import {BreedsClient} from "@/components/Dog-Breeds/page";
+import { BreedsServer } from "@/components/Breeds-server/page";
 
 export default function Home() {
   return (
@@ -12,7 +12,7 @@ export default function Home() {
           <SelectValue className="text-slate-900" placeholder="Velg en hunderace"/>
         </SelectTrigger>
         <SelectContent>
-         <BreedsClient/>
+         <BreedsServer/>
         </SelectContent>
         </Select>
       </main>

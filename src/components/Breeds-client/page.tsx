@@ -1,15 +1,15 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import { SelectGroup, SelectItem, SelectLabel} from "@/components/ui/select";
+import { SelectGroup, SelectItem} from "@/components/ui/select";
 
 type Breed = {
     BreedName: string;
-    SubBreeds: [undefined];
+    SubBreeds: [];
 };
 
 export const BreedsClient = () => {
- const [breeds, setBreeds] = useState(Object);
+ const [breeds, setBreeds] = useState<Breed[]>([]);
  const [loading, setLoading] = useState(true);
  const [error, setError] = useState("");
 
@@ -21,9 +21,8 @@ export const BreedsClient = () => {
             if (!response.ok) throw new Error("Faild to fetch dog breed list");
             const rawdata = await response.json();
             const entries = Object.entries(rawdata.message);
+            setBreeds(entries);
             console.log(entries);
-            setBreeds(entries[0]);
-            console.log(breeds);
         } catch(err){
             setError("Failed to fetch dog breed list");
             if(err instanceof Error) {
@@ -34,17 +33,24 @@ export const BreedsClient = () => {
         }
     }
     fetchBreeds();
-}, []);
+});
 
     if(error) return error;
     if(loading) return loading;
 
     return(
         <SelectGroup>
-            <SelectLabel>Hunderacer</SelectLabel>
-            {Array.isArray(breeds) ? breeds.map((breed : Breed) => {
-                return <SelectItem key={breed.BreedName} value="Dog">{JSON.stringify(breed.BreedName)}</SelectItem>
-            }) : <SelectItem value="F">Failed</SelectItem> }
+            {
+            Array.isArray(breeds) ? breeds.map((breed : Breed) => {
+                if(breed.SubBreeds.length > 0){
+                    breed.SubBreeds.forEach(subbreed => {
+                        return <SelectItem key={breed.BreedName + subbreed} value="Dog">{JSON.stringify(breed.BreedName) + subbreed}</SelectItem>
+                    });
+                } else{
+                    return <SelectItem key={breed.BreedName}  value="Dog">{JSON.stringify(breed.BreedName)}</SelectItem>
+                }
+             }) : <SelectItem value="F">Failed</SelectItem> 
+            }
         </SelectGroup>
     );
 };
