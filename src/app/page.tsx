@@ -6,13 +6,16 @@ import { Button } from "@/components/ui/button";
 import { SelectorValue } from "@/components/Selector-value/page";
 
 export default function Home() {
+  const selector = SelectorValue.getInstance();
+  let showImages = false;
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="grid grid-flow-col grid-rows-3 gap-8 row-start-2 items-center sm:items-start">
         <Input className="max-w-60" placeholder="Antal billeder" content="aff"/>
         <BreedsSelector/>
+        <Button className="self-stretch text-white" onClick={() => showImages = true}>Søg billeder</Button>
         <ScrollArea>
-          <RenderImages breed={SelectorValue.instance.get()}/>
+          if(showImages){<RenderImages breed={selector.get()}/>}
         </ScrollArea>
       </main>
     </div>

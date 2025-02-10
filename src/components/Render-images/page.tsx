@@ -12,7 +12,6 @@ export const RenderImages : FC<RenderProps> = ({breed}) => {
     let showImages : boolean = false;
     return(
         <div>
-        <Button className="self-stretch text-white" onClick={() => showImages = true}>Søg billeder</Button>
         <ScrollArea>
             if({showImages}) 
             {GetBreedServer(`${breed}`)}
