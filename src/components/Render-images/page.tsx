@@ -1,22 +1,23 @@
-
-import { useState } from "react";
+import { FC } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
 import { GetBreedServer } from "../Get-image-server/page";
+import { TemplateString } from "next/dist/lib/metadata/types/metadata-types";
 
-export const RenderImages = async (breed : string) => {
-    const [showImages, setShowImages] = useState(false);
-    
-    const response = await fetch(`https://dog.ceo/api/breed/${breed}/images`)
-    const data = await response.json();
-    const images = Object.keys(data);
+    interface RenderProps {
+        breed : string | TemplateString
+     }
 
+export const RenderImages : FC<RenderProps> = ({breed}) => {
+    let showImages : boolean = false;
     return(
         <div>
-        <Button className="self-stretch text-white" onClick={() => setShowImages(true)}>Søg billeder</Button>
+        <Button className="self-stretch text-white" onClick={() => showImages = true}>Søg billeder</Button>
         <ScrollArea>
-            
+            if({showImages}) 
+            {GetBreedServer(`${breed}`)}
         </ScrollArea>
         </div>        
     );
 }
+RenderImages.displayName = "RenderImages";
