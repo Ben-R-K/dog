@@ -7,7 +7,7 @@ export const BreedsServer = async () =>{
             return(
                 <SelectGroup>
                     {Array.isArray(breeds) ? breeds.map((breed) => {
-                            return <SelectItem key={breed} value={breed}>{breed}</SelectItem>
+                            return <SelectItem key={breed} value={breed.toString()}>{breed}</SelectItem>
                      }) : <SelectItem value="F">Failed</SelectItem>}
                 </SelectGroup>
             );

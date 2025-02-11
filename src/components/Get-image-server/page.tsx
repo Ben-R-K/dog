@@ -1,6 +1,7 @@
+import { TemplateString } from "next/dist/lib/metadata/types/metadata-types";
 
-export async function GetBreedServer(breed : string) {
-    const response = await fetch(`https://dog.ceo/api/breed/${breed}/images`)
+export async function GetBreedServer(breed : string | TemplateString) {
+    const response = await fetch(`https://dog.ceo/api/breed/${breed.toString()}/images`)
     const data = await response.json();
     const images = Object.values(data.message);
     console.log(breed);

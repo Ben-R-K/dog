@@ -1,11 +1,10 @@
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { BreedsServer } from "@/components/Breeds-server/page";
 import { GetBreedServer } from "@/components/Get-image-server/page";
 import { Button } from "@/components/ui/button";
 
-export default function Home() {
+export default function Home({Breed}: MainBreedValue) {
   return (
     <div className="min-h-screen m-44">
       <main className="grid grid-rows-3 grid-flow-col gap-6 justify-items-center">
@@ -26,4 +25,6 @@ export default function Home() {
     </div>
   );
 }
+
+
 

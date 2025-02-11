@@ -1,22 +1,15 @@
-
-import { useState } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Button } from "@/components/ui/button";
 import { GetBreedServer } from "../Get-image-server/page";
+import { SelectorValue } from "../Selector-value/page";
 
-export const RenderImages = async (breed : string) => {
-    const [showImages, setShowImages] = useState(false);
-    
-    const response = await fetch(`https://dog.ceo/api/breed/${breed}/images`)
-    const data = await response.json();
-    const images = Object.keys(data);
-
+interface BreedValue {
+    Value: SelectorValue;
+}
+export const RenderImages = ({Value}: BreedValue) => {
     return(
-        <div>
-        <Button className="self-stretch text-white" onClick={() => setShowImages(true)}>Søg billeder</Button>
-        <ScrollArea>
-            
-        </ScrollArea>
-        </div>        
+        <ScrollArea> 
+            {GetBreedServer(`${Value}`)}
+        </ScrollArea>       
     );
 }
+RenderImages.displayName = "RenderImages";
