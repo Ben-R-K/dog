@@ -1,12 +1,14 @@
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { GetBreedServer } from "../Get-image-server/page";
-import { useValue } from "../SelectValue-provider/page";
+import { SelectorValue } from "../Selector-value/page";
 
-export const RenderImages = () => {
-    const Value = useValue();
+interface BreedValue {
+    Value: SelectorValue;
+}
+export const RenderImages = ({Value}: BreedValue) => {
     return(
         <ScrollArea> 
-            {GetBreedServer(`${Value.Elements.Value}`)}
+            {GetBreedServer(`${Value}`)}
         </ScrollArea>       
     );
 }
