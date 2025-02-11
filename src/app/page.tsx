@@ -2,6 +2,7 @@ import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { BreedsServer } from "@/components/Breeds-server/page";
 import { GetBreedServer } from "@/components/Get-image-server/page";
+import { Select, SelectTrigger, SelectValue, SelectContent } from "@radix-ui/react-select";
 import { Button } from "@/components/ui/button";
 
 export default function Home({Breed}: MainBreedValue) {
