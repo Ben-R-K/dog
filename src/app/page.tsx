@@ -1,5 +1,5 @@
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { SelectContent, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Selector } from "@/components/Selector/page";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { BreedsServer } from "@/components/Breeds-server/page";
@@ -7,6 +7,7 @@ import { GetBreedServer } from "@/components/Get-image-server/page";
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
+  const {render, SelectedBreed} = Selector();
   return (
     <div className="min-h-screen m-44">
       <main className="grid grid-rows-1 grid-cols-5 grid-flow-col justify-items-stretch">
