@@ -1,13 +1,13 @@
 import { Input } from "@/components/ui/input";
 import { SelectContent, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Selector } from "@/components/Selector/page";
+import { Selector, BreedContext } from "@/components/Selector/page";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { BreedsServer } from "@/components/Breeds-server/page";
 import { GetBreedServer } from "@/components/Get-image-server/page";
 import { Button } from "@/components/ui/button";
+import { useContext } from "react";
 
 export default function Home() {
-  const {render, SelectedBreed} = Selector();
   return (
     <div className="min-h-screen m-44">
       <main className="grid grid-rows-1 grid-cols-5 grid-flow-col justify-items-stretch">
@@ -24,7 +24,7 @@ export default function Home() {
         <Button className="font-semibold max-w-60">Søg efter hunderacen</Button>
         </div>
         <ScrollArea className="max-h-screen row-span-3 col-span-2 col-start-4 justify-self-end overflow-auto">
-            {GetBreedServer("african")}
+            {GetBreedServer(BreedContext().SelectedBreed)}
         </ScrollArea>
       </main>
     </div>
